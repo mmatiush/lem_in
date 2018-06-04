@@ -13,9 +13,9 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#define INTERIM 0
-#define START 1
-#define END 2
+# define INTERIM 0
+# define START 1
+# define END 2
 
 # define NEUTRAL 0
 # define BLACK 1
@@ -35,12 +35,12 @@ typedef struct		s_link
 struct				s_room
 {
 	char			*name;
-	int				weight;
 	int				coord_x;
 	int				coord_y;
+	int				weight;
+	unsigned		room_type:2;
 	unsigned		color:2;
 	unsigned		state:1;
-	unsigned		room_type:2;
 	t_link			*link;
 	t_room			*next;
 };
@@ -48,20 +48,26 @@ struct				s_room
 typedef struct		s_queue
 {
 	t_room			*room_ptr;
-	struct	s_queue	*next; 
+	struct	s_queue	*next;
 }					t_queue;
 
-int					parse_input();
+int					parse_input(t_room **rooms_ptr);
 int					validate_str(char *str, t_room **rooms_ptr);
+
+/*
+** Validation
+*/
+
 int					validate_room(char *str, t_room **rooms_ptr);
-int					validate_link(char *str, t_room **rooms_ptr);
+int					validate_and_add_link(char *str, t_room **rooms_ptr);
+
+int					ft_ptrtostrnum(char **str_arr);
+int					ft_strisint(char *str);
+
+t_room				*find_room(char *str, t_room *rooms_ptr);
+t_link				*find_link(char *str, t_link *link);
 
 int					add_room(char *str, t_room **rooms_ptr, unsigned room_type);
-
-
-
-
-int					get_str_num(char **str_arr);
-
+int					add_link(t_link **link, t_room *room);
 
 #endif

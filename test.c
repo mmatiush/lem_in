@@ -83,14 +83,6 @@ char                **ft_strsplit(char const *s, char c)
     return (str);
 }
 
-// int main() {
-//   char *str = "Hello, world";
-//   char **str_arr;
-//   str_arr = ft_strsplit(str, ' ');
-//   ft_free_str_arr(&str_arr); // NOT OK
-//   return 0;
-// }
-
 void	i_win_free(char **str)
 {
 	for (int i = 0; i < 2; i++){  
@@ -104,23 +96,9 @@ int main() {
   char *str = "Hello, world";
   char **str_arr;
   str_arr = ft_strsplit(str, ' ');
-  printf("%s\n", str_arr[0]);
-  i_win_free(str_arr);
-  printf("%s\n", str_arr[0]);
-//   str_arr++;
-//   ft_free_str_arr(&(str_arr));	//	OK
-  //ft_free_str_arr(&str_arr);		OK
-
-
-
+  printf("%p\n", str_arr);
+//   i_win_free(str_arr);
+  ft_free_str_arr(&str_arr);
+  printf("%p\n", (&(str_arr + 1));
   return 0;
 }
-
-// int main() {
-//   char *str = "Hello, world";
-//   char **str_arr;
-//   str_arr = ft_strsplit(str, ' ');
-//   str_arr = str_arr + 1;
-//   ft_free_str_arr(&(str_arr)); // OK
-//   return 0;
-// }

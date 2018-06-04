@@ -4,11 +4,11 @@ SRC_DIR :=		./src/
 OBJ_DIR :=		./obj/
 INC_DIR :=		./inc/
 
-SRC :=			lem_in.c parse_input.c validate_str.c validate_room.c validate_link.c add_link.c
+SRC :=			lem_in.c parse_input.c validate_str.c validate_room.c validate_and_add_link.c add_room.c add_link.c find_room.c find_link.c
 
 OBJ :=			$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-CC :=			gcc
+CC :=			gcc -g
 CC_FLAGS :=		-Wall -Wextra -Werror
 
 LIBFT_DIR :=	./libft/
