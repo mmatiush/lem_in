@@ -41,6 +41,7 @@ struct				s_room
 	unsigned		room_type:2;
 	unsigned		color:2;
 	unsigned		state:1;
+	t_room			*room_path;
 	t_link			*link;
 	t_room			*next;
 };
@@ -50,6 +51,9 @@ typedef struct		s_queue
 	t_room			*room_ptr;
 	struct	s_queue	*next;
 }					t_queue;
+
+t_queue				*g_front;
+t_queue				*g_rear;
 
 int					parse_input(t_room **rooms_ptr);
 int					validate_str(char *str, t_room **rooms_ptr);
@@ -70,4 +74,5 @@ t_link				*find_link(char *str, t_link *link);
 int					add_room(char *str, t_room **rooms_ptr, unsigned room_type);
 int					add_link(t_link **link, t_room *room);
 
+int					print_rl(t_room *room);
 #endif

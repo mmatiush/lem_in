@@ -1,20 +1,6 @@
 #include "libft.h"
 #include "lem_in.h"
 
-// int		space_num(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str)
-// 	{
-// 		if (*str == ' ')
-// 			i++;
-// 		str++;
-// 	}
-// 	return (i);
-// }
-
 int		ft_ptrtostrnum(char **str_arr)
 {
 	int	num;
