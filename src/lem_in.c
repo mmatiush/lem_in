@@ -4,10 +4,11 @@
 int		main(void)
 {
 	t_room		*rooms_ptr;
-	t_room		**valid_paths;
+	t_room		*valid_paths;
+	int			ants;
 
 	rooms_ptr = NULL;
-	if (!(parse_input(&rooms_ptr)))
+	if (!(parse_input(&rooms_ptr, &ants)))
 		return (0);
 	if (!(valid_paths = find_paths(rooms_ptr)))
 	{
@@ -15,6 +16,5 @@ int		main(void)
 		return (0);
 	}
 	print_rl(rooms_ptr);
-
-	return (1);
+	
 }

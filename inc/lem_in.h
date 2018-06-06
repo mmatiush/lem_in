@@ -41,7 +41,7 @@ struct				s_room
 	unsigned		room_type:2;
 	unsigned		color:2;
 	unsigned		state:1;
-	t_room			*room_path;
+	t_room			*path;
 	t_link			*link;
 	t_room			*next;
 };
@@ -55,24 +55,30 @@ typedef struct		s_queue
 t_queue				*g_front;
 t_queue				*g_rear;
 
-int					parse_input(t_room **rooms_ptr);
-int					validate_str(char *str, t_room **rooms_ptr);
+int					parse_input(t_room **room_ptr, int *ants);
+int					validate_str(char *str, t_room **room_ptr);
 
 /*
 ** Validation
 */
 
-int					validate_room(char *str, t_room **rooms_ptr);
-int					validate_and_add_link(char *str, t_room **rooms_ptr);
+int					validate_room(char *str, t_room **room_ptr);
+int					validate_and_add_link(char *str, t_room **room_ptr);
+int					get_ants_num(int *ants, char *str);
 
 int					ft_ptrtostrnum(char **str_arr);
-int					ft_strisint(char *str);
 
-t_room				*find_room(char *str, t_room *rooms_ptr);
+t_room				*find_room(char *str, t_room *room);
 t_link				*find_link(char *str, t_link *link);
 
-int					add_room(char *str, t_room **rooms_ptr, unsigned room_type);
+int					add_room(char *str, t_room **room_ptr, unsigned room_type);
 int					add_link(t_link **link, t_room *room);
 
 int					print_rl(t_room *room);
+
+int					enqueue(t_room *room);
+void				dequeue(void);
+
+
+
 #endif

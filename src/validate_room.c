@@ -1,6 +1,19 @@
 #include "libft.h"
 #include "lem_in.h"
 
+int		space_num(char *str)
+{
+	int i;
+	i = 0;
+	while (*str)
+	{
+		if (*str == ' ')
+			i++;
+		str++;
+	}
+	return (i);
+}
+
 int		ft_ptrtostrnum(char **str_arr)
 {
 	int	num;
@@ -16,16 +29,6 @@ int		ft_ptrtostrnum(char **str_arr)
 	return (num);
 }
 
-int		ft_strisint(char *str)
-{
-	if (!str)
-		return (0);
-	if (ft_strequ(ft_itoa((ft_atoi(str))), str))
-		return (1);
-	else
-		return (0);
-}
-
 int		validate_room(char *str, t_room **rooms_ptr)
 {
 	char	**str_arr;
@@ -33,6 +36,8 @@ int		validate_room(char *str, t_room **rooms_ptr)
 	if (str[0] == 'L')
 		return (0);
 	if (ft_strchr(str, '-'))
+		return (0);
+	if(space_num(str) != 2)
 		return (0);
 	str_arr = ft_strsplit(str, ' ');
 	if (ft_ptrtostrnum(str_arr) != 3)

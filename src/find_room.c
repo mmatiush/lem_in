@@ -1,15 +1,15 @@
 #include "libft.h"
 #include "lem_in.h"
 
-t_room		*find_room(char *str, t_room *rooms_ptr)
+t_room		*find_room(char *str, t_room *room)
 {
-	if (!rooms_ptr)
+	if (!room)
 		return (NULL);
-	while (rooms_ptr)
+	while (room)
 	{
-		if (ft_strequ(rooms_ptr->name, str))
-			return (rooms_ptr);
-		rooms_ptr = rooms_ptr->next;
+		if (ft_strequ(room->name, str))
+			return (room);
+		room = room->next;
 	}
 	return (NULL);
 }

@@ -2,7 +2,7 @@
 #include "lem_in.h"
 
 int		enqueue(t_room *room)
-{
+{ 
 	t_queue		*temp;
 
 	if (!(temp = (t_queue*)malloc(sizeof(t_queue))))
@@ -20,12 +20,20 @@ int		enqueue(t_room *room)
 	return (1);
 }
 
-void	dequeue()
+void	dequeue(void)
 {
+	t_queue		*temp;
 
-}
-
-t_queue	*front()
-{
-	return ();
+	if (!(temp = (t_queue*)malloc(sizeof(t_queue))))
+		return (0);
+	temp = g_front;
+	if (g_front == NULL)
+		return (0);
+	if (g_front == g_rear)
+	{
+		g_front = NULL;
+		g_rear = NULL;
+	}
+	g_front = g_front->next;
+	free(temp);
 }

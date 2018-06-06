@@ -4,15 +4,28 @@
 #define ROOMS 0
 #define LINKS 1
 
-void		check_if_hash_command(char *str, unsigned *room_type_ptr)
+static int	check_if_hash_command(char *str, unsigned *room_type_ptr)
 {
+	static	int flag;
+
 	if (ft_strequ("##start", str))
+	{
+		if (flag == 2)
+			return (0);
+		flag++;
 		*room_type_ptr = START;
+	}
 	else if (ft_strequ("##end", str))
+	{
+		if (flag == 2)
+			return (0);
+		flag++;
 		*room_type_ptr = END;
+	}
+	return (1);
 }
 
-int		validate_str(char *str, t_room **rooms_ptr)
+int			validate_str(char *str, t_room **rooms_ptr)
 {
 	static int		flag;
 	static unsigned	room_type;
@@ -21,7 +34,8 @@ int		validate_str(char *str, t_room **rooms_ptr)
 		return (0);
 	if (str[0] == '#')
 	{
-		check_if_hash_command(str, &room_type);
+		if (!(check_if_hash_command(str, &room_type)))
+			return (0);
 		return (1);
 	}
 	else if (flag == ROOMS && validate_room(str, rooms_ptr))
