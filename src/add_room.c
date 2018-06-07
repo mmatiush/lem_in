@@ -33,9 +33,10 @@ int			add_room(char *str, t_room **rooms_ptr, unsigned room_type)
 		return (0);
 	temp->weight = 0;
 	temp->room_type = room_type;
-	temp->color = NEUTRAL;
+	temp->visited = FALSE;
 	temp->state = OPEN;
 	temp->link = NULL;
+	temp->path = NULL;
 	temp->next = *rooms_ptr;
 	*rooms_ptr = temp;
 	ft_free_str_arr(&str_arr);

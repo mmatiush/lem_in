@@ -13,9 +13,17 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+// Room type
+
 # define INTERIM 0
 # define START 1
 # define END 2
+# define NEAR_START 3
+
+// Visited
+
+# define FALSE 0
+# define TRUE 1
 
 # define NEUTRAL 0
 # define BLACK 1
@@ -39,8 +47,8 @@ struct				s_room
 	int				coord_y;
 	int				weight;
 	unsigned		room_type:2;
-	unsigned		color:2;
 	unsigned		state:1;
+	unsigned		visited:1;
 	t_room			*path;
 	t_link			*link;
 	t_room			*next;
@@ -76,9 +84,9 @@ int					add_link(t_link **link, t_room *room);
 
 int					print_rl(t_room *room);
 
-int					enqueue(t_room *room);
-void				dequeue(void);
-
+int					enqueue(t_room *room, t_room *prev_room);
+t_room				*dequeue(void);
+int					queue_is_empty(void);
 
 
 #endif
