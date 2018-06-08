@@ -3,10 +3,13 @@
 
 int		get_ants_num(int *ants, char *str)
 {
-	if (!ft_strisint(str) || !str)
+	if (!str)
 		return (0);
-	*ants = ft_atoi(str);
-	if (*ants <= 0)
+	if (!ft_strisint(str) || (*ants = ft_atoi(str)) <= 0)
+	{
+		ft_printf("No ants\n");
+		free(str);
 		return (0);
+	}
 	return (1);
 }

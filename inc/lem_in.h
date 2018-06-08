@@ -25,9 +25,9 @@
 # define FALSE 0
 # define TRUE 1
 
-# define NEUTRAL 0
-# define BLACK 1
-# define WHITE 2
+# define WHITE 0
+# define GREY 1
+# define BLACK 2
 
 # define OPEN 0
 # define CLOSED 1
@@ -48,7 +48,7 @@ struct				s_room
 	int				weight;
 	unsigned		room_type:2;
 	unsigned		state:1;
-	unsigned		visited:1;
+	unsigned		color:2;
 	t_room			*path;
 	t_link			*link;
 	t_room			*next;
@@ -87,6 +87,8 @@ int					print_rl(t_room *room);
 int					enqueue(t_room *room, t_room *prev_room);
 t_room				*dequeue(void);
 int					queue_is_empty(void);
+
+int					find_paths(t_room *room, t_queue **valid_paths);
 
 
 #endif

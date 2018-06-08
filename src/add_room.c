@@ -7,6 +7,8 @@
 
 static int	validate_coords(t_room *room, int x, int y)
 {
+	if (x < 0 || y < 0)
+		return (0);
 	while (room)
 	{
 		if (room->coord_x == x && room->coord_y == y)
@@ -33,7 +35,7 @@ int			add_room(char *str, t_room **rooms_ptr, unsigned room_type)
 		return (0);
 	temp->weight = 0;
 	temp->room_type = room_type;
-	temp->visited = FALSE;
+	temp->color = WHITE;
 	temp->state = OPEN;
 	temp->link = NULL;
 	temp->path = NULL;
