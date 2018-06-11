@@ -10,16 +10,17 @@ int		enqueue(t_room *room, t_room *prev_room)
 	temp->room_ptr = room;
 	room->color = GREY;
 	temp->next = NULL;
+	// if (prev_room && room->room_type != START)
+	if (prev_room)
+	{
+		room->path = prev_room;
+		room->weight = prev_room->weight + 1;
+	}
 	if (g_front == NULL && g_rear == NULL)
 	{
 		g_front = temp;
 		g_rear = temp;
 		return (1);
-	}
-	if (room->room_type != START)
-	{
-		room->path = prev_room;
-		room->weight = prev_room->weight + 1;
 	}
 	g_rear->next = temp;
 	g_rear = temp;

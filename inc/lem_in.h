@@ -20,17 +20,9 @@
 # define END 2
 # define NEAR_START 3
 
-// Visited
-
-# define FALSE 0
-# define TRUE 1
-
 # define WHITE 0
 # define GREY 1
 # define BLACK 2
-
-# define OPEN 0
-# define CLOSED 1
 
 typedef struct		s_room t_room;
 
@@ -46,9 +38,10 @@ struct				s_room
 	int				coord_x;
 	int				coord_y;
 	int				weight;
-	unsigned		room_type:2;
-	unsigned		state:1;
-	unsigned		color:2;
+	// unsigned		room_type:2;
+	unsigned		room_type;
+	// unsigned		color:2;
+	unsigned		color;
 	t_room			*path;
 	t_link			*link;
 	t_room			*next;

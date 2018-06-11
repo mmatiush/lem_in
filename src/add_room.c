@@ -36,7 +36,6 @@ int			add_room(char *str, t_room **rooms_ptr, unsigned room_type)
 	temp->weight = 0;
 	temp->room_type = room_type;
 	temp->color = WHITE;
-	temp->state = OPEN;
 	temp->link = NULL;
 	temp->path = NULL;
 	temp->next = *rooms_ptr;

@@ -29,7 +29,8 @@ static int	mark_rooms_near_start(t_room *room)
 	}
 	while(link)
 	{
-		link->room_ptr->room_type = NEAR_START;
+		if (link->room_ptr->room_type != END)
+			link->room_ptr->room_type = NEAR_START;
 		link = link->next;
 	}
 	return (1);
