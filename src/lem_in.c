@@ -41,21 +41,118 @@ void	update_paths_weight(t_queue *valid_paths)
 	}
 }
 
-void	send_ants(int ants, t_queue *valid_paths)
+t_ants	*create_ants_list(int n_ants)
 {
-	if (valid_paths->room_ptr->path->room_type == START)
-		return ();
+	t_ants	*ants;
+	t_ants	*temp;
+
+	ants = NULL;
+	while (n_ants > 0)
+	{
+		if (!(temp = (t_ants*)malloc(sizeof(t_ants))))
+			return (NULL);
+		temp->name = n_ants;
+		temp->room_ptr = NULL;
+		temp->next = ants;
+		ants = temp;
+		n_ants--;
+	}
+	return (ants);
+}
+
+void	add_new_ants(int *n_ants, t_ants **ants_ptr, t_queue *valid_paths)
+{
+	int				num;
+
+	num = *n_ants;
+	while(valid_paths && num > 0)
+	{
+		(*ants_ptr)->room_ptr = valid_paths->room_ptr;
+		num -= valid_paths->room_ptr->weight;
+		(*n_ants)--;
+		valid_paths = valid_paths->next;
+		(*ants_ptr) = (*ants_ptr)->next;
+	}
+}
+
+void	delete_ant(t_ants** ants)
+{
+	t_ants	*temp;
+
+	temp = *ants;
+	free(temp);
+	*ants = (*ants)->next;
+}
+
+void	move_existing_ants(t_ants **ants)
+{
+	t_ants	*temp;
+
+	temp = *ants;
+	while(temp && temp->room_ptr)
+	{
+		if (temp->room_ptr->room_type == END)
+		{
+			temp = temp->next;
+			delete_ant(ants);
+		}
+		else
+		{
+			temp->room_ptr = temp->room_ptr->path;
+			temp = temp->next;
+		}
+	}
+}
+
+void	print_ants(t_ants *ants)
+{
+	while (ants && ants->room_ptr)
+	{
+		ft_printf("L%d-%s", ants->name, ants->room_ptr->name);
+		ants = ants->next;
+		if (ants && ants->room_ptr)
+			ft_printf(" ");
+	}
+	ft_printf("\n");
+}
+
+void	move_ants(int n_ants, t_ants *ants, t_queue *valid_paths)
+{
+	t_ants	*empty_ant_node;
+
+	empty_ant_node = ants;
+	while (ants)
+	{
+		move_existing_ants(&ants);
+		add_new_ants(&n_ants, &empty_ant_node, valid_paths);
+		print_ants(ants);
+	}
+}
+
+int		send_ants(int n_ants, t_queue *valid_paths)
+{
+	t_ants	*ants;
+
+	// if (valid_paths->room_ptr->path->room_type == START)
+	// {
+	// 	teleport_ants();
+	// 	return ;
+	// }
+	if (!(ants = create_ants_list(n_ants)))
+		return (0);
+	move_ants(n_ants, ants, valid_paths);
+	return (1);
 }
 
 int		main(void)
 {
 	t_room		*rooms_ptr;
 	t_queue		*valid_paths;
-	int			ants;
+	int			n_ants;
 
 	rooms_ptr = NULL;
 	valid_paths = NULL;
-	if (!(parse_input(&rooms_ptr, &ants)))
+	if (!(parse_input(&rooms_ptr, &n_ants)))
 		return (0);
 	print_room_types(rooms_ptr);
 	find_paths(rooms_ptr, &valid_paths);
@@ -66,12 +163,9 @@ int		main(void)
 		return (0);
 	}
 	else
-	{
-		while (valid_paths)
-		{
-			print_vp(valid_paths);
-		}
-	}
-	send_ants(ants, valid_paths);
+		print_vp(valid_paths);
+	if (!(send_ants(n_ants, valid_paths)))
+		return (0);
 	print_rl(rooms_ptr);
+	return (1);
 }

@@ -53,6 +53,13 @@ typedef struct		s_queue
 	struct	s_queue	*next;
 }					t_queue;
 
+typedef struct		s_ants
+{
+	int				name;
+	t_room			*room_ptr;
+	struct s_ants	*next;
+}					t_ants;
+
 t_queue				*g_front;
 t_queue				*g_rear;
 
