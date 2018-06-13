@@ -53,7 +53,6 @@ int		parse_input(t_room **rooms_ptr, int *ants)
 		}
 		if (validate_str(buff, rooms_ptr) == 0)
 		{
-			ft_printf("ERROR\n");
 			free(buff);
 			return (0);
 		}

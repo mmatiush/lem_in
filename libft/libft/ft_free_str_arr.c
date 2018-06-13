@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-void	ft_free_str_arr(char ***str)
+int	ft_free_str_arr(char ***str)
 {
 	int	i;
 
 	i = 0;
 	if (!*str)
-		return ;
+		return (1);
 	while ((*str)[i])
 	{
 		free((*str)[i]);
@@ -26,4 +26,5 @@ void	ft_free_str_arr(char ***str)
 	}
 	free(*str);
 	*str = NULL;
+	return (1);
 }

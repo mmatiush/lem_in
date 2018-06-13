@@ -31,7 +31,8 @@ int			add_room(char *str, t_room **rooms_ptr, unsigned room_type)
 		return (0);
 	temp->coord_x = ft_atoi(str_arr[1]);
 	temp->coord_y = ft_atoi(str_arr[2]);
-	if (!(validate_coords(*rooms_ptr, temp->coord_x, temp->coord_y)))
+	if (!(validate_coords(*rooms_ptr, temp->coord_x, temp->coord_y)) \
+		&& ft_free_str_arr(&str_arr))
 		return (0);
 	temp->weight = 0;
 	temp->room_type = room_type;

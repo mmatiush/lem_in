@@ -95,7 +95,7 @@ int					ft_ischrctr(int c);
 size_t				ft_strwdnb(const char *s);
 int					ft_isspace(int c);
 int					ft_intlen(int n);
-void				ft_free_str_arr(char ***str);
+int					ft_free_str_arr(char ***str);
 int					ft_strisint(char *str);
 
 #endif

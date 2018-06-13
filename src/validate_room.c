@@ -33,6 +33,7 @@ int		validate_room(char *str, t_room **rooms_ptr)
 {
 	char	**str_arr;
 
+	str_arr = NULL;
 	if (str[0] == 'L')
 		return (0);
 	if (ft_strchr(str, '-'))
@@ -40,11 +41,12 @@ int		validate_room(char *str, t_room **rooms_ptr)
 	if(space_num(str) != 2)
 		return (0);
 	str_arr = ft_strsplit(str, ' ');
-	if (ft_ptrtostrnum(str_arr) != 3)
+	if (ft_ptrtostrnum(str_arr) != 3 && ft_free_str_arr(&str_arr))
 		return (0);
-	if (find_room(str_arr[0], *rooms_ptr))
+	if (find_room(str_arr[0], *rooms_ptr) && ft_free_str_arr(&str_arr))
 		return (0);
-	if (!ft_strisint(str_arr[1]) || !ft_strisint(str_arr[2]))
+	if ((!ft_strisint(str_arr[1]) || !ft_strisint(str_arr[2]))\
+		&& ft_free_str_arr(&str_arr))
 		return (0);
 	ft_free_str_arr(&str_arr);
 	return (1);

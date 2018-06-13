@@ -173,18 +173,18 @@ int		main(void)
 	update_paths_weight(valid_paths);
 	if (!(valid_paths))
 	{
-		ft_printf("NO VALID PATHS\n");
-		system ("leaks lem_in");
+		ft_printf("ERROR\n");
+		// system ("leaks lem_in");
 		return (1);
 	}
 	// else
 		// print_vp(valid_paths);
 	if (!(send_ants(n_ants, valid_paths)))
 	{
-		system ("leaks lem_in");
+		// system ("leaks lem_in");
 		return (1);
 	}
 	// print_rl(rooms_ptr);
-	system ("leaks lem_in");
+	// system ("leaks lem_in");
 	return (0);
 }
