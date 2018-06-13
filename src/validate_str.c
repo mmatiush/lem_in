@@ -8,6 +8,8 @@ static int	check_if_hash_command(char *str, unsigned *room_type_ptr)
 {
 	static	int flag;
 
+	if (*room_type_ptr == START || *room_type_ptr == END)
+		return (0);
 	if (ft_strequ("##start", str))
 	{
 		if (flag == 2)
