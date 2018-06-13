@@ -11,5 +11,6 @@ int		get_ants_num(int *ants, char *str)
 		free(str);
 		return (0);
 	}
+	free(str);
 	return (1);
 }
