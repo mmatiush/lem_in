@@ -14,10 +14,15 @@
 
 int		ft_strisint(char *str)
 {
+	char	*temp;
+
 	if (!str)
 		return (0);
-	if (ft_strequ(ft_itoa((ft_atoi(str))), str))
+	if (ft_strequ(temp = ft_itoa((ft_atoi(str))), str))
+	{
+		free(temp);
 		return (1);
-	else
-		return (0);
+	}
+	free(temp);
+	return (0);
 }
