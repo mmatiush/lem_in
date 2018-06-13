@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_paths.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmatiush <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/13 19:06:09 by mmatiush          #+#    #+#             */
+/*   Updated: 2018/06/13 19:06:10 by mmatiush         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "lem_in.h"
 
 t_room		*get_end_room(t_room *room)
 {
-	while(room)
+	while (room)
 	{
 		if (room->room_type == END)
 			return (room);
@@ -53,24 +65,6 @@ void		make_grey_rooms_white(t_room *room)
 	}
 }
 
-void		add_rooms_to_queue(t_link *link, t_room *temp)
-{
-	if (!link)
-		return ;	
-	while (link)
-	{
-		if (link->room_ptr->color == WHITE)
-			enqueue(link->room_ptr, temp);
-		link = link->next;
-	}
-}
-
-void		clean_queue()
-{
-	while(g_front != NULL)
-		dequeue();
-}
-
 int			find_paths(t_room *room, t_queue **valid_paths)
 {
 	t_room	*end;
@@ -88,14 +82,13 @@ int			find_paths(t_room *room, t_queue **valid_paths)
 		flag = 0;
 		while (!queue_is_empty())
 		{
-			
 			if ((temp = dequeue()) && (temp->room_type == NEAR_START || temp->room_type == START))
 			{
 				add_valid_path(temp, valid_paths);
 				make_grey_rooms_white(room);
 				clean_queue();
 				flag = 1;
-				break;
+				break ;
 			}
 			if (temp)
 				add_rooms_to_queue(temp->link, temp);

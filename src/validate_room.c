@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_room.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmatiush <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/13 19:06:00 by mmatiush          #+#    #+#             */
+/*   Updated: 2018/06/13 19:06:02 by mmatiush         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "lem_in.h"
 
-int		space_num(char *str)
+static int	space_num(char *str)
 {
 	int i;
+
 	i = 0;
 	while (*str)
 	{
@@ -14,7 +27,7 @@ int		space_num(char *str)
 	return (i);
 }
 
-int		ft_ptrtostrnum(char **str_arr)
+int			ft_ptrtostrnum(char **str_arr)
 {
 	int	num;
 
@@ -29,7 +42,7 @@ int		ft_ptrtostrnum(char **str_arr)
 	return (num);
 }
 
-int		validate_room(char *str, t_room **rooms_ptr)
+int			validate_room(char *str, t_room **rooms_ptr)
 {
 	char	**str_arr;
 
@@ -38,7 +51,7 @@ int		validate_room(char *str, t_room **rooms_ptr)
 		return (0);
 	if (ft_strchr(str, '-'))
 		return (0);
-	if(space_num(str) != 2)
+	if (space_num(str) != 2)
 		return (0);
 	str_arr = ft_strsplit(str, ' ');
 	if (ft_ptrtostrnum(str_arr) != 3 && ft_free_str_arr(&str_arr))

@@ -6,7 +6,9 @@ INC_DIR :=		./inc/
 
 SRC :=			lem_in.c parse_input.c validate_str.c validate_room.c \
 				validate_and_add_link.c add_room.c add_link.c find_room.c \
-				find_link.c print_rl.c queue.c get_ants_num.c find_paths.c 
+				find_link.c queue.c get_ants_num.c find_paths.c \
+				update_paths_weight.c send_ants.c move_ants.c \
+				mark_rooms_near_start.c
 
 OBJ :=			$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 

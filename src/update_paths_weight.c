@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_link.c                                        :+:      :+:    :+:   */
+/*   update_paths_weight.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmatiush <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/13 19:05:45 by mmatiush          #+#    #+#             */
-/*   Updated: 2018/06/13 19:05:46 by mmatiush         ###   ########.fr       */
+/*   Created: 2018/06/13 19:05:20 by mmatiush          #+#    #+#             */
+/*   Updated: 2018/06/13 19:05:21 by mmatiush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lem_in.h"
 
-t_link		*find_link(char *str, t_link *link)
+void	update_paths_weight(t_queue *valid_paths)
 {
-	while (link)
+	t_room	*room;
+	t_room	*temp;
+	int		i;
+
+	while (valid_paths)
 	{
-		if (ft_strequ(link->room_ptr->name, str))
-			return (link);
-		link = link->next;
+		i = 0;
+		room = valid_paths->room_ptr;
+		temp = valid_paths->room_ptr;
+		while (room)
+		{
+			i++;
+			room = room->path;
+		}
+		temp->weight = --i;
+		valid_paths = valid_paths->next;
 	}
-	return (NULL);
 }
