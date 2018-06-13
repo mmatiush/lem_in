@@ -28,7 +28,7 @@ void	update_paths_weight(t_queue *valid_paths)
 
 	while (valid_paths)
 	{
-		i = 1;
+		i = 0;
 		room = valid_paths->room_ptr;
 		temp = valid_paths->room_ptr;
 		while (room)
@@ -106,6 +106,8 @@ void	move_existing_ants(t_ants **ants)
 
 void	print_ants(t_ants *ants)
 {
+	if (ants == NULL)
+		return ;
 	while (ants && ants->room_ptr)
 	{
 		ft_printf("L%d-%s", ants->name, ants->room_ptr->name);
@@ -129,15 +131,28 @@ void	move_ants(int n_ants, t_ants *ants, t_queue *valid_paths)
 	}
 }
 
+void	teleport_ants(int n_ants, t_queue *valid_paths)
+{
+	int i;
+
+	i = 1;
+	while (i < n_ants)
+	{
+		ft_printf("L%d-%s ", i, valid_paths->room_ptr->path->name);
+		i++;
+	}
+	ft_printf("L%d-%s\n", i, valid_paths->room_ptr->path->name);
+}
+
 int		send_ants(int n_ants, t_queue *valid_paths)
 {
 	t_ants	*ants;
 
-	// if (valid_paths->room_ptr->path->room_type == START)
-	// {
-	// 	teleport_ants();
-	// 	return ;
-	// }
+	if (valid_paths->room_ptr->room_type == START && valid_paths->room_ptr->path->room_type == END)
+	{
+		teleport_ants(n_ants, valid_paths);
+		return (1);
+	}
 	if (!(ants = create_ants_list(n_ants)))
 		return (0);
 	move_ants(n_ants, ants, valid_paths);
@@ -152,20 +167,24 @@ int		main(void)
 
 	rooms_ptr = NULL;
 	valid_paths = NULL;
-	if (!(parse_input(&rooms_ptr, &n_ants)))
-		return (0);
-	print_room_types(rooms_ptr);
+	parse_input(&rooms_ptr, &n_ants);
+	// print_room_types(rooms_ptr);
 	find_paths(rooms_ptr, &valid_paths);
 	update_paths_weight(valid_paths);
 	if (!(valid_paths))
 	{
 		ft_printf("NO VALID PATHS\n");
-		return (0);
+		system ("leaks lem_in");
+		return (1);
 	}
-	else
-		print_vp(valid_paths);
+	// else
+		// print_vp(valid_paths);
 	if (!(send_ants(n_ants, valid_paths)))
-		return (0);
-	print_rl(rooms_ptr);
-	return (1);
+	{
+		system ("leaks lem_in");
+		return (1);
+	}
+	// print_rl(rooms_ptr);
+	system ("leaks lem_in");
+	return (0);
 }

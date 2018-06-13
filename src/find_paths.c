@@ -21,17 +21,6 @@ void		make_path_black(t_room *room)
 	}
 }
 
-// static int	is_path_black(t_room *room)
-// {
-// 	while (room->room_type != START && room->color != BLACK)
-// 	{
-// 		if (room->color == BLACK)
-// 			return (1);
-// 		room = room->path;
-// 	}
-// 	return (0);
-// }
-
 static int	add_valid_path(t_room *room, t_queue **valid_paths)
 {
 	t_queue *temp;
