@@ -107,4 +107,6 @@ int					send_ants(int n_ants, t_queue *valid_paths);
 
 int					add_to_map(char *str, t_map **map);
 
+int					clear_lemin(t_room **rooms_ptr, t_queue **valid_paths, \
+					 t_map **map);
 #endif
