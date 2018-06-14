@@ -30,15 +30,9 @@ int				mark_rooms_near_start(t_room *room)
 	t_link	*link;
 
 	if (!(start = get_start_room(room)))
-	{
-		ft_printf("No start room\n");
 		return (0);
-	}
 	if (!(link = start->link))
-	{
-		ft_printf("Start room has no links\n");
 		return (0);
-	}
 	while (link)
 	{
 		if (link->room_ptr->room_type != END)
