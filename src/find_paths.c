@@ -55,7 +55,7 @@ static int	add_valid_path(t_room *room, t_queue **valid_paths)
 	return (1);
 }
 
-void		make_grey_rooms_white(t_room *room)
+void		make_grey_rooms_white(t_room *room, int *flag)
 {
 	while (room)
 	{
@@ -63,6 +63,8 @@ void		make_grey_rooms_white(t_room *room)
 			room->color = WHITE;
 		room = room->next;
 	}
+	*flag = 1;
+	clean_queue();
 }
 
 int			find_paths(t_room *room, t_queue **valid_paths)
@@ -71,8 +73,6 @@ int			find_paths(t_room *room, t_queue **valid_paths)
 	t_room	*temp;
 	int		flag;
 
-	g_front = NULL;
-	g_rear = NULL;
 	if (!(end = get_end_room(room)))
 		return (0);
 	flag = 1;
@@ -82,12 +82,11 @@ int			find_paths(t_room *room, t_queue **valid_paths)
 		flag = 0;
 		while (!queue_is_empty())
 		{
-			if ((temp = dequeue()) && (temp->room_type == NEAR_START || temp->room_type == START))
+			if ((temp = dequeue()) && \
+				(temp->room_type == NEAR_START || temp->room_type == START))
 			{
 				add_valid_path(temp, valid_paths);
-				make_grey_rooms_white(room);
-				clean_queue();
-				flag = 1;
+				make_grey_rooms_white(room, &flag);
 				break ;
 			}
 			if (temp)

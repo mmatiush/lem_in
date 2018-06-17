@@ -57,7 +57,7 @@ void	move_existing_ants(t_ants **ants)
 	}
 }
 
-void	teleport_ants(int n_ants, t_queue *valid_paths)
+void	teleport_ants(int n_ants, t_queue *valid_paths, int flag)
 {
 	int i;
 
@@ -68,17 +68,24 @@ void	teleport_ants(int n_ants, t_queue *valid_paths)
 		i++;
 	}
 	ft_printf("L%d-%s\n", i, valid_paths->room_ptr->path->name);
+	if (flag & NSTEPS)
+		ft_printf("\nSteps taken: [ 1 ]\n\n");
 }
 
-void	move_ants(int n_ants, t_ants *ants, t_queue *valid_paths)
+void	move_ants(int n_ants, t_ants *ants, t_queue *valid_paths, int flag)
 {
 	t_ants	*empty_ant_node;
+	int		n_steps;
 
+	n_steps = 0;
 	empty_ant_node = ants;
 	while (ants)
 	{
 		move_existing_ants(&ants);
 		add_new_ants(&n_ants, &empty_ant_node, valid_paths);
 		print_ants(ants);
+		n_steps++;
 	}
+	if (flag & NSTEPS)
+		ft_printf("\nSteps taken: [ %d ]\n\n", --n_steps);
 }

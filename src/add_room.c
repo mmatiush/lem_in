@@ -35,9 +35,9 @@ int			add_room(char *str, t_room **rooms_ptr, unsigned room_type)
 	t_room		*temp;
 	char		**str_arr;
 
-	if ((!(str_arr = ft_strsplit(str, ' '))) || (!(temp = (t_room*)malloc(sizeof(t_room)))))
-		return (0);
-	if (!(temp->name = ft_strdup(str_arr[0])))
+	if ((!(str_arr = ft_strsplit(str, ' '))) || \
+		(!(temp = (t_room*)malloc(sizeof(t_room)))) || \
+		(!(temp->name = ft_strdup(str_arr[0]))))
 		return (0);
 	temp->coord_x = ft_atoi(str_arr[1]);
 	temp->coord_y = ft_atoi(str_arr[2]);

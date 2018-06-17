@@ -39,7 +39,7 @@ static int	check_if_hash_command(char *str, unsigned *room_type_ptr)
 	return (1);
 }
 
-int			validate_str(char *str, t_room **rooms_ptr)
+int			validate_str(char *str, t_room **rooms_ptr, int *n_rooms)
 {
 	static int		flag;
 	static unsigned	room_type;
@@ -56,6 +56,7 @@ int			validate_str(char *str, t_room **rooms_ptr)
 	{
 		if (!(add_room(str, rooms_ptr, room_type)))
 			return (0);
+		(*n_rooms)++;
 		room_type = INTERIM;
 		return (1);
 	}

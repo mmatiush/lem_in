@@ -22,6 +22,11 @@
 # define GREY 1
 # define BLACK 2
 
+# define LEAKS 1
+# define NROOM 2
+# define NSTEPS 4
+# define MUSIC 8
+
 typedef struct s_room	t_room;
 
 typedef struct		s_link
@@ -64,9 +69,11 @@ typedef struct		s_map
 
 t_queue				*g_front;
 t_queue				*g_rear;
+int					g_ant_color;
 
-int					parse_input(t_room **room_ptr, int *ants, t_map **map);
-int					validate_str(char *str, t_room **room_ptr);
+int					parse_input(t_room **rooms_ptr, int *ants, t_map **map, \
+					int *n_rooms);
+int					validate_str(char *str, t_room **rooms_ptr, int *n_rooms);
 
 /*
 ** Validation
@@ -101,12 +108,13 @@ void				add_new_ants(int *n_ants, t_ants **ants_ptr, \
 void				delete_ant(t_ants **ants);
 void				move_existing_ants(t_ants **ants);
 void				print_ants(t_ants *ants);
-void				move_ants(int n_ants, t_ants *ants, t_queue *valid_paths);
-void				teleport_ants(int n_ants, t_queue *valid_paths);
-int					send_ants(int n_ants, t_queue *valid_paths);
+void				move_ants(int n_ants, t_ants *ants, t_queue *valid_paths, \
+					int flag);
+void				teleport_ants(int n_ants, t_queue *valid_paths, int flag);
+int					send_ants(int n_ants, t_queue *valid_paths, int flag);
 
 int					add_to_map(char *str, t_map **map);
 
 int					clear_lemin(t_room **rooms_ptr, t_queue **valid_paths, \
-					 t_map **map);
+					t_map **map);
 #endif

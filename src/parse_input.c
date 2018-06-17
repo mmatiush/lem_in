@@ -34,7 +34,7 @@ int		add_to_map(char *str, t_map **map)
 	return (1);
 }
 
-int		parse_input(t_room **rooms_ptr, int *ants, t_map **map)
+int		parse_input(t_room **rooms_ptr, int *ants, t_map **map, int *n_rooms)
 {
 	char	*buff;
 
@@ -49,7 +49,7 @@ int		parse_input(t_room **rooms_ptr, int *ants, t_map **map)
 			free(buff);
 			break ;
 		}
-		if (validate_str(buff, rooms_ptr) == 0)
+		if (validate_str(buff, rooms_ptr, n_rooms) == 0)
 		{
 			free(buff);
 			return (0);

@@ -13,6 +13,20 @@
 #include "libft.h"
 #include "lem_in.h"
 
+static void	clear_links(t_link *link)
+{
+	t_link	*temp;
+
+	if (link == NULL)
+		return ;
+	while (link)
+	{
+		temp = link;
+		link = link->next;
+		free(temp);
+	}
+}
+
 static void	clear_room(t_room **rooms_ptr)
 {
 	t_room	*temp;
@@ -23,6 +37,7 @@ static void	clear_room(t_room **rooms_ptr)
 	{
 		temp = *rooms_ptr;
 		*rooms_ptr = (*rooms_ptr)->next;
+		clear_links(temp->link);
 		free(temp->name);
 		free(temp);
 	}
@@ -57,7 +72,7 @@ static void	clea_map(t_map **map)
 	}
 }
 
-int		clear_lemin(t_room **rooms_ptr, t_queue **valid_paths, t_map **map)
+int			clear_lemin(t_room **rooms_ptr, t_queue **valid_paths, t_map **map)
 {
 	clear_room(rooms_ptr);
 	clear_queue(valid_paths);

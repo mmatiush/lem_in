@@ -46,18 +46,18 @@ void	print_ants(t_ants *ants)
 	ft_printf("\n");
 }
 
-int		send_ants(int n_ants, t_queue *valid_paths)
+int		send_ants(int n_ants, t_queue *valid_paths, int flag)
 {
 	t_ants	*ants;
 
 	if (valid_paths->room_ptr->room_type == START &&\
 		valid_paths->room_ptr->path->room_type == END)
 	{
-		teleport_ants(n_ants, valid_paths);
+		teleport_ants(n_ants, valid_paths, flag);
 		return (1);
 	}
 	if (!(ants = create_ants_list(n_ants)))
 		return (0);
-	move_ants(n_ants, ants, valid_paths);
+	move_ants(n_ants, ants, valid_paths, flag);
 	return (1);
 }
